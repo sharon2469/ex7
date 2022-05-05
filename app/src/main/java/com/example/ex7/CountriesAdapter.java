@@ -18,12 +18,13 @@ import java.util.List;
 
 public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.CountriesViewHolder> {
 
-    private final List<Country> countryList;
+    private static List<Country> countryList;
     private int selectedRow = -1;
 
     public CountriesAdapter(Context context) {
         countryList = CountryXMLParser.parseCountries(context);
     }
+
 
     @NonNull
     @Override
@@ -32,6 +33,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
         View countryView = inflater.inflate(R.layout.country_item, parent, false);
         return new CountriesViewHolder(countryView);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull CountriesViewHolder holder, @SuppressLint("RecyclerView") int position) {

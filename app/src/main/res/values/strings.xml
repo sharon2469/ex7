@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ex7</string>
+    <string name="app_name">World Explorer</string>
     <string name="exitTxt">Exit</string>
     <string name="settingsTxt">settings</string>
     <string name="confirmationTxt">Are you sure?</string>
@@ -7,4 +7,5 @@
     <string name="method_sp">Using SP saving method.</string>
     <string name="countries_saved">Remember deleted countries.</string>
     <string name="countries_unsaved">Forget deleted countries.</string>
+    <string name="todo">TODO</string>
 </resources>
