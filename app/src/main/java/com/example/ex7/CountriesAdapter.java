@@ -1,11 +1,14 @@
 package com.example.ex7;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +19,7 @@ import java.util.List;
 public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.CountriesViewHolder> {
 
     private final List<Country> countryList;
+    private int selectedRow = -1;
 
     public CountriesAdapter(Context context) {
         countryList = CountryXMLParser.parseCountries(context);
@@ -30,8 +34,23 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CountriesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CountriesViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.bindData(countryList.get(position));
+
+        // This listener will change the color of selected row
+        holder.row_linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedRow = position;
+                notifyDataSetChanged();
+            }
+        });
+
+        if(selectedRow == position){
+            holder.row_linearLayout.setBackgroundColor(Color.parseColor("#03dffc"));
+        }else{
+            holder.row_linearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        }
     }
 
     @Override
@@ -50,6 +69,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
         private final ImageView flagImageView;
         private final TextView  nameTextView;
         private final TextView  populationTextView;
+        private LinearLayout row_linearLayout;
 
         public CountriesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,7 +78,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
             flagImageView       = itemView.findViewById(R.id.flagImageView);
             nameTextView        = itemView.findViewById(R.id.nameTextView);
             populationTextView  = itemView.findViewById(R.id.populationTextView);
-
+            row_linearLayout        = itemView.findViewById(R.id.country_item);
             //*****************************************************************************************
             // This listener function call the function removeItem -> wil remove item from the ArrayList***
             //**************************************************************************************
@@ -66,6 +86,8 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
                 removeItem(getAdapterPosition());
                 return true;
             });
+
+
         }
 
         //******** This function bind\connect the row widgets with the data
@@ -77,7 +99,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
 
         private void removeItem(int position) {
             countryList.remove(position);
-            notifyItemRemoved(position);
+            notifyItemRemoved(position);// ****** this notify to the recycle that there is change in data base
         }
     }
 
