@@ -35,18 +35,16 @@ public class CountriesFragment extends Fragment  {
     }
 
     //*******************************************************************
-    // After activity created we can set the adapter for the recycle view
+    // After activity created we can set the ADAPTER for the recycle view
     //*******************************************************************
     @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        countriesAdapter = new CountriesAdapter(getActivity());
-        recyclerView.setAdapter(countriesAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        countriesAdapter = new CountriesAdapter(getActivity()); // create an instance of the adapter
+        recyclerView.setAdapter(countriesAdapter); // set that adapter for the recycle view
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity())); // What is the position of the list vertical or linear
 
     }
-
-
 
 
     @Override

@@ -29,12 +29,13 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
     @NonNull
     @Override
     public CountriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View countryView = inflater.inflate(R.layout.country_item, parent, false);
-        return new CountriesViewHolder(countryView);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext()); // instance of the inflater
+        View countryView = inflater.inflate(R.layout.country_item, parent, false); // get view of the country view object
+        return new CountriesViewHolder(countryView); // return county view holder
     }
 
 
+    // this call by recyclerView for each row in in view
     @Override
     public void onBindViewHolder(@NonNull CountriesViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.bindData(countryList.get(position));
@@ -55,6 +56,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
         }
     }
 
+    // This function just tell to the recycler view how many items in the data
     @Override
     public int getItemCount() {
         return countryList.size();
